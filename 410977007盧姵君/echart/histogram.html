@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+
+        <!-- EChart CDN  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="fruit-chart" style="width: 800px; height:600px"></div>
+        <script>
+            // initial chart 
+            var fruit_chart = echarts.init(document.getElementById("fruit-chart"));
+
+            // set option 
+            var option = {
+                color: ["red"],
+                title: {
+                    text: "text"
+                },
+                tooltip: {},
+                legend: {
+                    data: [
+                        {
+                            name: "data1",
+                            icon: "circle",
+                        }
+                    ]
+                },
+                xAxis: {
+                    type: "category",
+                    data:["1", "2", "3", "4", "5", "6", "7"],
+                    name: "xAxis name"
+                },
+                yAxis: {
+                    type: "value",
+                    name: "yAxis name"
+                },
+                series: [
+                    {
+                        name: "data1",
+                        data: [5, 20, 36, 10, 10, 20, 10], 
+                        type: "bar"
+                    }
+                ]
+            };
+
+            fruit_chart.setOption(option);
+        </script>
+    </body>
+</html>

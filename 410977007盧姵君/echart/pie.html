@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+
+        <!-- EChart CDN  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="fruit-chart" style="width: 800px; height:600px"></div>
+        <script>
+            // initial chart 
+            var fruit_chart = echarts.init(document.getElementById("fruit-chart"));
+
+            // set option 
+            var option = {
+                title:{
+                    text:"某訊息得知管道調查"
+                },
+                tooltip:{
+                    trigger:"item",
+                    formatter:"{a} <br/>{b}:{c} ({d}%)"
+                },
+                legend:{
+                    orient:"vertical",
+                    left:10,
+                    top:30,
+                    data: ["Facebook", "Instagram", "Youtube", "PTT", "Dcard"],
+                },
+                series: [
+                    {
+                        name: "訪問來源",
+                        type: "pie",
+                        data: [
+                            {value: 108, name: "Facebook"},
+                            {value: 109, name: "Instagram"},
+                            {value: 406, name: "Youtube"},
+                            {value: 39, name: "PTT"},
+                            {value: 34, name: "Dcard"},
+                        ]
+                    }
+                ]
+            };
+
+            fruit_chart.setOption(option);
+        </script>
+    </body>
+</html>

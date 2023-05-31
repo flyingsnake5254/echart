@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+
+        <!-- EChart CDN  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="fruit-chart" style="width: 800px; height:600px"></div>
+        <script>
+            // initial chart 
+            var fruit_chart = echarts.init(document.getElementById("fruit-chart"));
+
+            // set option 
+            var option = {
+                color: ["blue", "orange"],
+                title: {
+                    text: "7個月蔬果交易重量與利潤表",
+                },
+                tooltip: {
+                    trigger: "axis"
+                },
+                legend: {
+                    data: [
+                        {
+                            name: "重量（公噸）",
+                            icon: "circle",
+                        },
+                        {
+                            name: "利潤（十萬）",
+                            icon: "circle",
+                        }
+                    ]
+                },
+                xAxis: {
+                    data:["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
+                    x: "center",
+                    right: 50,
+                    name: "月份"
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: "重量（公噸）",
+                        data: [5, 20, 36, 10, 10, 20, 10], 
+                        type: "line",
+                    },
+                    {
+                        name: "利潤（十萬）",
+                        data: [3, 10, 25, 5, 8, 15, 8], 
+                        type: "line"
+                    }
+                ]
+            };
+
+            fruit_chart.setOption(option);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+    </head>
+    <body>
+        <div id="3c-chart" style="width: 1000px; height:600px"></div>
+        <script>
+            var url = "https://dummyjson.com/products";
+            var product_chart = echarts.init(document.getElementById("3c-chart"));
+
+            fetch(url, {
+                method : "GET",
+            })
+            .then(response => response.json())
+            .then(item => {
+                var datas = [];
+                for (var i = 0 ; i < 5 ; i ++){
+                    datas.push({
+                        "title" : item["products"][i]["title"],
+                        "price" : item["products"][i]["price"]
+                    });
+                }
+
+                var mtitle = datas.map(ele => {
+                    return ele["title"];
+                });
+                var mprice = datas.map(ele => {
+                    return ele["price"];
+                });
+
+                var option = {
+                    title: {
+                        text: "3C產品價格"
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: [
+                            {
+                                name: "3C產品價格",
+                                icon: "circle",
+                                color: "blue"
+                            }
+                        ]
+                    },
+                    xAxis: {
+                        type: "category",
+                        data:mtitle,
+                        name: "品名"
+                        
+                    },
+                    yAxis: {
+                        type: "value",
+                        name: "價格（美元）"
+                    },
+                    series: [
+                        {
+                            name: "3C產品價格",
+                            data: mprice, 
+                            type: "bar"
+                        }
+                    ]
+                };
+
+                product_chart.setOption(option);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        </script>
+    </body>
+</html>

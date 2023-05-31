@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>p50 echart test</title>
+        <!-- EChart CDN  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="main" style="width: 1000px; height:600px"></div>
+        <script>
+            var my_chart = echarts.init(document.getElementById("main"));
+
+            var datas = new Array();
+            var url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json";
+            fetch (url, {
+                method : "GET",
+            }).then (response => {
+                return response.json();
+            }).then(json => {
+                json.forEach(item => {
+                    datas.push({"year" : item.年, 
+                    "month" : item.月, 
+                    "avgVolumn" : item.日均運量, 
+                    "totalVolumn" : item.總運量});
+                })
+                console.log(datas);
+
+                var totalVolumn = datas.map(item => {
+                    return parseInt(item["totalVolumn"]);
+                });
+
+                var year = datas.map(item => {
+                    return (parseInt(item["year"]) + 1911).toString();
+                });
+
+                var month = datas.map(item => {
+                    return item["month"];
+                });
+
+                var avgVolumn = datas.map(item => {
+                    return parseInt(item["avgVolumn"]);
+                });
+
+                var xAxisText = new Array();
+                for (var i = 0 ; i < year.length ; i ++){
+                    let temp = year[i]+"-"+month[i];
+                    xAxisText.push(year[i] + "-" + month[i]);
+                }
+
+                console.log(xAxisText);
+
+                var option = {
+                title : {
+                    text : "高雄輕軌月均運量統計"
+                }, 
+                tooltip : {
+                    triggerOn : "click",
+                    trigger : "axis"
+                },
+                legend : {
+                    data: [
+                        {
+                            name: "該月總運量人次",
+                        },
+                        {
+                            name: "日均運量",
+                        }
+                    ]
+                },
+                xAxis : {
+                    type : "category",
+                    name : "年-月",
+                    data : xAxisText
+                },
+                yAxis : {
+                    type : "value",
+                    name : "總運量（人）"
+                },
+                series : [
+                    {
+                        name : "該月總運量人次",
+                        data : totalVolumn,
+                        type : "bar",
+                        label : {
+                            show : true
+                        },
+                        animationDelay : 100
+            
+                    },
+                    {
+                        name : "日均運量",
+                        data : avgVolumn,
+                        type : "line",
+                        label : {
+                            show : true
+                        },
+                        animationDelay : 500
+                    }
+                ],
+                toolbox: {
+                    feature: {
+                        saveAsImage: {
+                            title: '儲存圖片', 
+                            type: 'png', 
+                            pixelRatio: 2 
+                        },
+                        magicType : {
+                            title: {
+                                bar:"柱狀圖",
+                                line:"折線圖",
+                                stack:"堆疊圖"
+                            },
+                            type : ["bar", "line", "stack"]
+                        },
+                        dataView : {
+                            title:"數據檢視",
+                            readOnly : false,
+                            lang: ['數據檢視', '關閉', '更新']
+
+                        },
+                        restore : {
+                            title:"reset"
+                        },
+                        dataZoom:{
+                            title: {
+                                zoom:"區域放大",
+                                back:"還原縮放"
+                            }
+                        }
+                    },
+
+                    
+                    
+                },
+                tooltip : {
+                    
+                    trigger : "item"
+                },
+                dataZoom: [ 
+                    {
+                        show: true,
+                        realtime: true,
+                        start: 0,
+                        end: 100
+                    }
+                ],
+            };
+
+            my_chart.setOption(option);
+            }).catch(error => {
+
+            });
+
+            
+        </script>
+    </body>
+</html>

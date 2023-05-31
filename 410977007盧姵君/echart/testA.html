@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <!-- EChart CDN  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="main" style="width: 800px; height:600px"></div>
+        <script>
+            var my_chart = echarts.init(document.getElementById("main"));
+            var option = {
+                title : {
+                    text : "小明的週薪圖"
+                }, 
+                tooltip : {
+                    triggerOn : "click",
+                    trigger : "axis"
+                },
+                legend : {},
+                xAxis : {
+                    type : "category",
+                    name : "星期",
+                    data : ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
+                },
+                yAxis : {
+                    type : "value",
+                    name : "新台幣（元）"
+                },
+                series : [
+                    {
+                        name : "薪水",
+                        data : [1221,1449,1532,1148,1668,2500,2100],
+                        type : "bar",
+                        label : {
+                            show : true
+                        }
+                    }
+                ],
+                toolbox: {
+                    feature: {
+                        saveAsImage: {
+                            title: '儲存圖片', 
+                            type: 'png', 
+                            pixelRatio: 2 
+                        },
+                        magicType : {
+                            type : ["bar", "line", "stack"]
+                        },
+                        dataView : {
+                            readOnly : false,
+                            lang: ['數據檢視', '關閉', '更新']
+
+                        },
+                        restore : {}
+                    }
+                },
+                tooltip : {
+                    triggerOn : "click",
+                    trigger : "item"
+                }
+            };
+
+            my_chart.setOption(option);
+        </script>
+    </body>
+</html>

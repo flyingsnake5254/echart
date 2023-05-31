@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+    </head>
+    <body>
+        <script>
+            
+
+            var datas = new Array();
+            var index = 0;
+            var url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json";
+            fetch (url, {
+                method : "GET",
+            }).then (response => {
+                return response.json();
+            }).then(json => {
+                json.forEach(item => {
+                    datas.push({"year" : item.年, 
+                    "month" : item.月, 
+                    "avgVolumn" : item.日均運量, 
+                    "totalVolumn" : item.總運量});
+                })
+                console.log(datas);
+            }).catch(error => {
+
+            });
+        </script>
+    </body>
+</html>

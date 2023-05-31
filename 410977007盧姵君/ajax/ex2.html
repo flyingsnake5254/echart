@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <script>
+   
+       
+            var url = "https://dummyjson.com/products";
+            axios.get(url).then(res => {
+                console.log(res);
+                console.log(res.data);
+            });
+        </script>
+    </body>
+</html>

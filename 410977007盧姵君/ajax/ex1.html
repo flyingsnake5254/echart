@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+   
+            var promise = $.ajax({
+                method : "",
+                url : "https://dummyjson.com/products"
+            });
+
+            promise.done((response) => {
+                var data = response;
+                console.log(data);
+            });
+
+            promise.fail((error) => {
+                
+            });
+        </script>
+    </body>
+</html>
